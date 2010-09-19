@@ -8,11 +8,12 @@ use CGI ();
 use LWP::UserAgent ();
 use Net::OAuth 0.25;
 use URI ();
+use URI::Escape ();
 
 use constant OAUTH_BASE_URL => 'https://auth.opera.com/service/oauth';
 use constant STATUS_UPDATE_URL => 'http://my.opera.com/community/api/users/status.pl';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # Opera supports only OAuth 1.0a
 $Net::OAuth::PROTOCOL_VERSION = &Net::OAuth::PROTOCOL_VERSION_1_0A;
@@ -306,7 +307,7 @@ sub update {
 		Carp::croak "Unable to initialize status-update request";
 	}
 
-	my $status_update_oauth_url = $request->to_url() . '&new_status=' . CGI::escape($new_status);
+	my $status_update_oauth_url = $request->to_url() . '&new_status=' . URI::Escape::uri_escape_utf8($new_status);
 	my $response = $self->_do_oauth_request($status_update_oauth_url);
 
 	#warn "status-update-oauth-url: " . $status_update_oauth_url . "\n";

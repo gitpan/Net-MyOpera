@@ -1,9 +1,9 @@
 --- #YAML:1.0
 name:               Net-MyOpera
-version:            0.01
+version:            0.02
 abstract:           a Perl interface to the My Opera Community API
 author:
-    - Cosimo Streppone <cosimo@cpan.org>
+    - Cosimo Streppone <cosimo@opera.com>
 license:            perl
 distribution_type:  module
 configure_requires:
@@ -11,9 +11,12 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    Net::OAuth:  0.25
-    Test::More:  0
-    URI:         0
+    CGI:             0
+    LWP::UserAgent:  0
+    Net::OAuth:      0.25
+    Test::More:      0
+    URI:             0
+    URI::Escape:     0
 no_index:
     directory:
         - t
